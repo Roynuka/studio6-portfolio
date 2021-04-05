@@ -31,7 +31,7 @@
     "path": "@PROJECT_PATH@",
     "versionFirst": "4.12.4",
     "siteFonts": [],
-    "uniqCompNum": 17,
+    "uniqCompNum": 18,
     "versionPublish": "4.12.4"
   },
   "pages": {
@@ -1135,11 +1135,32 @@
             }
           },
           "_name": "content2",
-          "_customHTML": "<section class=\"mbr-section article content1\">\n\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" step=\"1\" value=\"4\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" step=\"1\" value=\"4\">\n        <input type=\"color\" title=\"Background Color\" name=\"bgColor\" value=\"#ffffff\">\n    <!-- End block parameters -->\n    </mbr-parameters> \n\n    <div class=\"container\">\n        <div class=\"media-container-row\">\n            <div class=\"mbr-text col-12 col-md-8 mbr-fonts-style\" mbr-theme-style=\"display-7\" data-multiline mbr-article>\n                <blockquote><p><b style=\"font-style: normal;\">Installation</b></p><p><br></p></blockquote>\n            </div>\n        </div>\n    </div>\n</section>",
+          "_customHTML": "<section class=\"mbr-section article content1\">\n\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" step=\"1\" value=\"4\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" step=\"1\" value=\"4\">\n        <input type=\"color\" title=\"Background Color\" name=\"bgColor\" value=\"#ffffff\">\n    <!-- End block parameters -->\n    </mbr-parameters> \n\n    <div class=\"container\">\n        <div class=\"media-container-row\">\n            <div class=\"mbr-text col-12 col-md-8 mbr-fonts-style\" mbr-theme-style=\"display-7\" data-multiline mbr-article>\n                <blockquote><p><b style=\"font-style: normal;\">Installation</b></p><p><span style=\"font-style: normal;\">It took us at least 3 attempts before we we're finally able to get a running RT server working on Azure. By the time we got it working on the 3rd attempt we quickly realized it should have taken at least a good week instead of 3 to get it done. Most of the issues encountered were pretty much dependecies and conflicting packages.&nbsp;</span></p><p><span style=\"font-style: normal;\"><b>1st Installation</b></span></p><p><span style=\"font-style: normal;\">https://docs.bestpractical.com/rt/5.0.0/README.html</span></p><p><span style=\"font-style: normal;\">The first tutorial we found had was just a README documentation from the website itself. Not alot was explained properly as most of it had to be done ourselves. Long story short we never got past fixing all of the missing dependencies as most of it had to be manually done.</span></p><p><span style=\"font-style: normal;\"><br></span></p><p><span style=\"font-style: normal;\"><b>2nd Installation</b></span></p><p><span style=\"font-style: normal;\">-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"font-style: normal;\">https://www.youtube.com/watch?v=t051-l8oqDY</span></p><p><span style=\"font-style: normal;\">-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style=\"font-style: normal;\">https://hendgrow.com/ugs/HendGrow-RT5-INSTALL-A-ROBUST-HIGH-VOLUME-TICKETING-SYSTEM-ON-UBUNTU-20.04.pdf</span></p><p><span style=\"font-style: normal;\">After trial and error with the previous tutorial i needed to find something more that I understood. Luckily I stumbled upon one that not only included a video tutorial but a step-by-step document too plus other helpful links. It proved better to be a success but it was short lived. It fixed the previous missing dependencies but I ran into a mariadb error. Luckily Finn fixed it but there was conflicting packages. He suggested it might be because our ubuntu version was 18.04 whereas the tutorial was 20.04</span></p><p><span style=\"font-style: normal;\"><br></span></p><p><span style=\"font-style: normal;\"><b>3rd Installation</b></span></p><p><span style=\"font-style: normal;\">This time it went totally smooth with the only minor hiccup being after sucessful login onto RT, it refused to let us create users, groups, tickets etc.&nbsp;</span></p><p><span style=\"font-style: normal;\">The error being a CSRF. Later fixed by adding a couple lines of code onto config files.</span></p><p><span style=\"font-style: normal;\">Now just looking forward to getting onto the fun side of RT5 and getting eveyrything up and running like:</span></p><p><span style=\"font-style: normal;\">-</span>&nbsp; &nbsp; <span style=\"font-style: normal;\">creating users, groups</span></p><p><span style=\"font-style: normal;\">-</span>&nbsp; &nbsp; <span style=\"font-style: normal;\">creating tickets</span></p><p><span style=\"font-style: normal;\">-&nbsp;</span>&nbsp; &nbsp;<span style=\"font-style: normal;\">sending emails, notifications&nbsp;</span></p><p><span style=\"font-style: normal;\">-</span>&nbsp; &nbsp; <span style=\"font-style: normal;\">setting up security&nbsp;</span></p></blockquote>\n            </div>\n        </div>\n    </div>\n</section>",
           "_anchor": "content2-g",
           "_isUserblock": true,
           "_sourceTheme": "mobirise4",
           "_cid": "stbKbGAxys",
+          "_protectedParams": [],
+          "_global": false,
+          "_once": false,
+          "_params": {}
+        },
+        {
+          "alias": false,
+          "_styles": {
+            "padding-top": "(@paddingTop * 15px)",
+            "padding-bottom": "(@paddingBottom * 15px)",
+            "background-color": "@bgColor",
+            ".mbr-text, blockquote": {
+              "color": "#767676"
+            }
+          },
+          "_name": "content2",
+          "_customHTML": "<section class=\"mbr-section article content1\">\n\n    <mbr-parameters>\n    <!-- Block parameters controls (Blue \"Gear\" panel) -->\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"8\" step=\"1\" value=\"4\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"8\" step=\"1\" value=\"4\">\n        <input type=\"color\" title=\"Background Color\" name=\"bgColor\" value=\"#ffffff\">\n    <!-- End block parameters -->\n    </mbr-parameters> \n\n    <div class=\"container\">\n        <div class=\"media-container-row\">\n            <div class=\"mbr-text col-12 col-md-8 mbr-fonts-style\" mbr-theme-style=\"display-7\" data-multiline mbr-article>\n                <blockquote><p><span style=\"font-style: normal;\"><b>RT5</b></span></p><p><span style=\"font-style: normal;\">Now that we got RT finally installed, it was just a matter of adding more security to our server and having a crash course of how to use RT so we can able to teach the rest of our team. Fasial stated that he wanted the Dev Ops team and hopefully his future papers that he teaches to use this ticketing system.</span></p></blockquote>\n            </div>\n        </div>\n    </div>\n</section>",
+          "_anchor": "content2-h",
+          "_isUserblock": true,
+          "_sourceTheme": "mobirise4",
+          "_cid": "stGTZEzoSo",
           "_protectedParams": [],
           "_global": false,
           "_once": false,

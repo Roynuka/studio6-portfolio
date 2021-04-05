@@ -1607,6 +1607,15 @@ section.lazy-placeholder:after {
 .cid-stbKbGAxys blockquote {
   color: #767676;
 }
+.cid-stGTZEzoSo {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-color: #ffffff;
+}
+.cid-stGTZEzoSo .mbr-text,
+.cid-stGTZEzoSo blockquote {
+  color: #767676;
+}
 .cid-sr1pmfpEul .navbar {
   padding: .5rem 0;
   background: #333333;

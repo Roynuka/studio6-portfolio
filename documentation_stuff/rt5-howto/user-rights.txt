@@ -1,0 +1,16 @@
+user rights for
+- taking tickets
+
+1) login as root
+
+2) go to Admin>Queues>Select
+
+3) Select Queue>Staff
+
+4) User Rights
+
+	- from there search for user
+	- select appropiate rights
+	- save changes
+
+5) login to 'user' to check if 'user' is able to create, claim, own, delete tickets etc..

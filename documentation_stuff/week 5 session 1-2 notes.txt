@@ -1,0 +1,75 @@
+24-03-21
+
+- apparently something wrong with 'perl'
+- tried to install missing dependencies
+- found some useful links? 
+
+https://stackoverflow.com/questions/29229974/perl-missing-dependencies-for-request-tracker-installation
+
+http://requesttracker.8502.n7.nabble.com/Installation-Error-td45349.html
+- failed installation
+
+*************************
+
+youtube installation
+https://hendgrow.com/ugs/HendGrow-RT5-INSTALL-A-ROBUST-HIGH-VOLUME-TICKETING-SYSTEM-ON-UBUNTU-20.04.pdf
+
+https://www.youtube.com/watch?v=t051-l8oqDY
+
+install perl
+
+sudo apt install build-essential apache2 libapache2-mod-fcgid libssl-dev libexpat1-dev
+libmysqlclient-dev libcrypt-ssleay-perl liblwp-protocol-https-perl mariadb-server
+mariadb-client
+
+sudo /usr/bin/perl -MCPAN -e shell
+
+installing packages
+
+sudo cpan install Parallel::Perforce
+sudo cpan install HTML::FormatText
+sudo cpan install HTML::TreeBuilder
+sudo cpan install HTML::FormatText::WithLinks
+sudo cpan install HTML::FormatText::WithLinks::AndTables
+sudo cpan install DBD::mysql
+sudo cpan install LWP::Protocol::https
+
+to fix missing dependency for 'sudo cpan install LWP::Protocol::https'
+
+https://stackoverflow.com/questions/23092540/perl-module-lwpprotocolhttps-installation-fails-on-ubuntu
+
+install rt5 installation
+
+download file
+wget https://download.bestpractical.com/pub/rt/release/rt-5.0.0.tar.gz
+
+unpack file
+tar xzvf rt-5.0.0.tar.gz -C /tmp
+cd /tmp/rt-5.0.0/
+sudo ./configure
+
+
+error to fix, missing dependency
+DBD::mysql >= 2.1018, != 4.042 
+
+https://stackoverflow.com/questions/22264753/linux-how-to-install-dbdpg-module
+
+postgres issue encountered,
+error example 
+https://forum.bestpractical.com/t/rt-cannot-connect-to-local-postgresql-service-with-postgres-user/33026/4
+
+
+
+ALTER USER 'testuser'@'localhost' IDENTIFIED BY 'rtP@ssw0rd';
+
+
+Password:
+Working with:
+Type:   mysql
+Host:   localhost
+Port:
+Name:   rt5
+User:   rt_user
+DBA:    root
+
+ [2816] The requested host (20.58.156.241) does NOT match the configured WebDomain (localhost).  Perhaps you should Set($WebDomain, '20.58.156.241'); in RT_SiteConfig.pm, otherwise your internal hyperlinks may be broken

@@ -1,0 +1,18 @@
+assigning user rights to
+- create tickets
+- delete tickets
+- comment ticket etc
+
+1)login as admin
+
+2)create user
+
+3)enable privileged rights to user upin creation
+
+4)add user to general queue
+
+	- Admin>queue>General>User rights
+	- search for user then assign proper rights under 'general rights' then save
+	- upon assigning rights to the 'user' it should show a summary of 'rights' given and other 'users'
+
+you should be able to login as your 'user' and be able to create tickets

@@ -1,0 +1,48 @@
+Weekly Job: Every Friday (classroom is free after 10am)
+
+For each kit check the following: 
+
+*Slow start up times 
+*Successful Login 
+*Check for error messages  
+*Listen for unusual noises 
+*Check internet connectivity  
+*Visual distortions 
+*Check peripherals & cables  
+*All towers have a keyboard and mouse 
+*All Ethernet cables are plugged in to L ports not T (this will throw a domain name error upon login if incorrect) 
+
+Ensure you document the following: 
+
+*Tower # 
+*Time & date 
+*The fault (inclusive of any error messages) 
+*Solutions you have tried & the results 
+
+If there is an issue try your best to fix it during your round (e.g. reinstalling windows).  
+
+At the end of your round, if there are any issues you have been unable to solve send an email to Rob with what the computer, issue and solutions you've tried are. Regardless, please fill out the form attached and upload it to the Teams groups file under the D312 folder.
+
+You can find the keys in Paul's office to the left of the door hanging on a pin. If his office is locked get hold of Rob :)
+
+
+Schedule -
+(if Friday doesn't fit in your schedule, Mondays the following week is good too =)
+*Roy & Mason - 5th of March
+*Finn & Isaac - 12th of March
+*Jae & Rohill - 19th of March
+*Alister & Jordan - 26th of March
+*Roy & Mason - 2nd of April
+*Finn & Isaac - 9th of April
+*Jae & Rohill - 16th of April
+----
+Break
+----
+*Alister & Jordan - 23rd of April
+*Roy & Mason - 7th of May
+*Finn & Isaac - 14th of May
+*Jae & Rohill - 21st of May
+*Alister & Jordan - 28th of May
+*Roy & Mason - 4th of June
+*Finn & Isaac - 11th of June
+*Jae & Rohill - 18th of June

@@ -1,0 +1,8 @@
+1)	Upload the pfx and ca-bundle to host server
+2)	Log into host server and extract the key and cert from the pfx
+openssl pkcs12 -nocerts -in op-bit.nz.pfx -nodes -out op-bit.nz.pem
+openssl pkcs12 -nokeys -in op-bit.nz.pfx -out op-bit.nz.crt
+openssl rsa -in op-bit.nz.pem -out op-bit.nz.key
+3)	Copy the key, cert, and ca-bundle to /etc/apache2/ssl
+
+OP-BIT Certificate Password: OPBITWildC4rd

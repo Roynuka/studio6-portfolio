@@ -1,0 +1,47 @@
+Software required:
+1.Putty
+2.WinSCP 
+or
+MobaXterm
+
+Steps to renew or add SSL Certificate on the server 
+Using Putty and WinSCP
+
+Step 1.
+Open WinSCP
+
+Step 2.
+Upload the pfx and ca-bundle to server
+Copy and paste SSLCert Folder to the target server
+
+Step 3. 
+Login to the target server using Putty
+
+Step 4. 
+Check SSLCert folder existing on the server 
+
+Commands
+ll
+cd SSLCert
+
+if the folder doesn't exist, please go back to step 1 again
+
+
+Step 5.
+Extract the key and cert from the pfx (password is BITWildc4rdC3rt)
+Run the command below:ll
+
+openssl pkcs12 -nocerts -in ict.op.ac.nz.pfx -nodes -out ict.op.ac.nz.pem
+
+openssl pkcs12 -nokeys -in ict.op.ac.nz.pfx -out ict.op.ac.nz.crt
+
+openssl rsa -in ict.op.ac.nz.pem -out ict.op.ac.nz.key
+
+
+Step 6.
+Copy the key, cert, and ca-bundle to /etc/apache2/ssl
+ 
+Step 7.
+Apache2 service will needed a restart to load the updated cert
+
+

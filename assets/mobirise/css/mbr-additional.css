@@ -2079,6 +2079,23 @@ section.lazy-placeholder:after {
 .cid-sr1pmfpEul .dropdown-item:hover {
   color: #c1c1c1 !important;
 }
+.cid-syi9WmQ8gl {
+  padding-top: 90px;
+  padding-bottom: 15px;
+  background-color: #efefef;
+}
+.cid-syi9WmQ8gl P {
+  color: #767676;
+}
+.cid-syib456MLo {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-color: #ffffff;
+}
+.cid-syib456MLo .mbr-text,
+.cid-syib456MLo blockquote {
+  color: #767676;
+}
 .cid-sr1pmfpEul .navbar {
   padding: .5rem 0;
   background: #333333;

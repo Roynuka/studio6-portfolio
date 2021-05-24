@@ -11,14 +11,15 @@
   
   
   <title>Ticketing</title>
-  <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons-bold/mobirise-icons-bold.css">
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="assets/tether/tether.min.css">
   <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/tether/tether.min.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="stylesheet" href="assets/gallery/style.css">
   <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
   
   
@@ -77,7 +78,7 @@
     </nav>
 </section>
 
-<section class="engine"><a href="https://mobirise.info">Mobirise</a></section><section class="header1 cid-stbvz28pdc" id="header16-d">
+<section class="engine"><a href="https://mobirise.info/s">bootstrap themes</a></section><section class="header1 cid-stbvz28pdc" id="header16-d">
 
     
 
@@ -129,10 +130,20 @@
     <div class="container">
         <div class="media-container-row">
             <div class="mbr-text col-12 col-md-8 mbr-fonts-style display-7">
-                <blockquote><p><strong>Installation</strong></p><p><span style="font-style: normal;">It took us at least 3 attempts before we we're finally able to get a running RT server working on Azure. By the time we got it working on the 3rd attempt we quickly realized it should have taken at least a good week instead of 3 to get it done. Most of the issues encountered were pretty much dependecies and conflicting packages.&nbsp;</span></p><p><span style="font-style: normal;"><strong>1st Installation</strong></span></p><p><span style="font-style: normal;">https://docs.bestpractical.com/rt/5.0.0/README.html</span></p><p><span style="font-style: normal;">The first tutorial we found had was just a README documentation from the website itself. Not alot was explained properly as most of it had to be done ourselves. Long story short we never got past fixing all of the missing dependencies as most of it had to be manually done.</span></p><p><span style="font-style: normal;"><br></span></p><p><span style="font-style: normal;"><strong>2nd Installation</strong></span></p><p><span style="font-style: normal;">-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: normal;">https://www.youtube.com/watch?v=t051-l8oqDY</span></p><p><span style="font-style: normal;">-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: normal;">https://hendgrow.com/ugs/HendGrow-RT5-INSTALL-A-ROBUST-HIGH-VOLUME-TICKETING-SYSTEM-ON-UBUNTU-20.04.pdf</span></p><p><span style="font-style: normal;">After trial and error with the previous tutorial i needed to find something more that I understood. Luckily I stumbled upon one that not only included a video tutorial but a step-by-step document too plus other helpful links. It proved better to be a success but it was short lived. It fixed the previous missing dependencies but I ran into a mariadb error. Luckily Finn fixed it but there was conflicting packages. He suggested it might be because our ubuntu version was 18.04 whereas the tutorial was 20.04</span></p><p><span style="font-style: normal;"><br></span></p><p><span style="font-style: normal;"><strong>3rd Installation</strong></span></p><p><span style="font-style: normal;">This time it went totally smooth with the only minor hiccup being after sucessful login onto RT, it refused to let us create users, groups, tickets etc.&nbsp;</span></p><p><span style="font-style: normal;">The error being a CSRF. Later fixed by adding a couple lines of code onto config files.</span></p><p><span style="font-style: normal;">Now just looking forward to getting onto the fun side of RT5 and getting eveyrything up and running like:</span></p><p><span style="font-style: normal;">-</span>&nbsp; &nbsp; <span style="font-style: normal;">creating users, groups</span></p><p><span style="font-style: normal;">-</span>&nbsp; &nbsp; <span style="font-style: normal;">creating tickets</span></p><p><span style="font-style: normal;">-&nbsp;</span>&nbsp; &nbsp;<span style="font-style: normal;">sending emails, notifications&nbsp;</span></p><p><span style="font-style: normal;">-</span>&nbsp; &nbsp; <span style="font-style: normal;">setting up security&nbsp;</span></p></blockquote>
+                <blockquote><p><strong>Installation</strong></p><p><span style="font-style: normal;">It took us at least 3 attempts before we we're finally able to get a running RT server working on Azure. By the time we got it working on the 3rd attempt we quickly realized it should have taken at least a good week instead of 3 to get it done. Most of the issues encountered were pretty much dependecies and conflicting packages.&nbsp;</span></p><p><span style="font-style: normal;"><strong>1st Installation</strong></span></p><p><span style="font-style: normal;">https://docs.bestpractical.com/rt/5.0.0/README.html</span></p><p><span style="font-style: normal;">The first tutorial we found had was just a README documentation from the website itself. Not alot was explained properly as most of it had to be done ourselves. Long story short we never got past fixing all of the missing dependencies as most of it had to be manually done.</span></p><p><span style="font-style: normal;"><br></span></p><p><span style="font-style: normal;"><strong>2nd Installation</strong></span></p><p><span style="font-style: normal;">-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: normal;">https://www.youtube.com/watch?v=t051-l8oqDY</span></p><p><span style="font-style: normal;">-</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-style: normal;">https://hendgrow.com/ugs/HendGrow-RT5-INSTALL-A-ROBUST-HIGH-VOLUME-TICKETING-SYSTEM-ON-UBUNTU-20.04.pdf</span></p><p><span style="font-style: normal;">After trial and error with the previous tutorial i needed to find something more that I understood. Luckily I stumbled upon one that not only included a video tutorial but a step-by-step document too plus other helpful links. It proved better to be a success but it was short lived. It fixed the previous missing dependencies but I ran into a mariadb error. Luckily Finn fixed it but there was conflicting packages. He suggested it might be because our ubuntu version was 18.04 whereas the tutorial was 20.04</span></p><p><span style="font-style: normal;"><br></span></p><p><span style="font-style: normal;"><strong>3rd Installation</strong></span></p><p><span style="font-style: normal;">This time it went totally smooth with the only minor hiccup being after sucessful login onto RT, it refused to let us create users, groups, tickets etc.&nbsp;</span></p><p><span style="font-style: normal;">The error being a CSRF. Later fixed by adding a couple lines of code onto config files. Specifically /opt/rt5/etc/RT_SiteConfig.pm.</span></p><p><span style="font-style: normal;">Now just looking forward to getting onto the fun side of RT5 and getting eveyrything up and running like:</span></p><p><span style="font-style: normal;">-</span>&nbsp; &nbsp; <span style="font-style: normal;">creating users, groups</span></p><p><span style="font-style: normal;">-</span>&nbsp; &nbsp; <span style="font-style: normal;">creating tickets</span></p><p><span style="font-style: normal;">-&nbsp;</span>&nbsp; &nbsp;<span style="font-style: normal;">sending emails, notifications&nbsp;</span></p><p><span style="font-style: normal;">-</span>&nbsp; &nbsp; <span style="font-style: normal;">setting up security&nbsp;</span></p></blockquote>
             </div>
         </div>
     </div>
+</section>
+
+<section class="mbr-gallery mbr-slider-carousel cid-syj3LbaEZX" id="gallery2-17">
+
+    
+
+    <div>
+        <div><!-- Filter --><!-- Gallery --><div class="mbr-gallery-row"><div class="mbr-gallery-layout-default"><div><div><div class="mbr-gallery-item mbr-gallery-item--p4" data-video-url="false" data-tags="Awesome"><div href="#lb-gallery2-17" data-slide-to="0" data-toggle="modal"><img src="assets/images/possible-error-create-users-1912x200-800x84.png" alt="" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p4" data-video-url="false" data-tags="Responsive"><div href="#lb-gallery2-17" data-slide-to="1" data-toggle="modal"><img src="assets/images/configfile-645x616-645x616.png" alt="" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p4" data-video-url="false" data-tags="Creative"><div href="#lb-gallery2-17" data-slide-to="2" data-toggle="modal"><img src="assets/images/createticket-1902x966-800x406.png" alt="" title=""><span class="icon-focus"></span></div></div></div></div><div class="clearfix"></div></div></div><!-- Lightbox --><div data-app-prevent-settings="" class="mbr-slider modal fade carousel slide" tabindex="-1" data-keyboard="true" data-interval="false" id="lb-gallery2-17"><div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div class="carousel-inner"><div class="carousel-item"><img src="assets/images/possible-error-create-users-1912x200.png" alt="" title=""></div><div class="carousel-item"><img src="assets/images/configfile-645x616.png" alt="" title=""></div><div class="carousel-item active"><img src="assets/images/createticket-1902x966.png" alt="" title=""></div></div><a class="carousel-control carousel-control-prev" role="button" data-slide="prev" href="#lb-gallery2-17"><span class="mbri-left mbr-iconfont" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control carousel-control-next" role="button" data-slide="next" href="#lb-gallery2-17"><span class="mbri-right mbr-iconfont" aria-hidden="true"></span><span class="sr-only">Next</span></a><a class="close" href="#" role="button" data-dismiss="modal"><span class="sr-only">Close</span></a></div></div></div></div></div>
+    </div>
+
 </section>
 
 <section class="mbr-section article content1 cid-stGTZEzoSo" id="content2-h">
@@ -142,7 +153,7 @@
     <div class="container">
         <div class="media-container-row">
             <div class="mbr-text col-12 col-md-8 mbr-fonts-style display-7">
-                <blockquote><p><span style="font-style: normal;"><strong>RT5</strong></span></p><p><span style="font-style: normal;">Now that we got RT finally installed, it was just a matter of adding more security to our server and having a crash course of how to use RT so we can able to teach the rest of our team. Fasial stated that he wanted the Dev Ops team and hopefully his future papers that he teaches to use this ticketing system.</span></p></blockquote>
+                <blockquote><p><span style="font-style: normal;"><strong>RT5</strong></span></p><p><span style="font-style: normal;">Now that we got RT finally installed, it was just a matter of adding more security to our server and having a crash course of how to use RT so we can able to teach the rest of our team. Fasial stated that he wanted the Dev Ops team and hopefully his future papers that he teaches to use this ticketing system.</span></p><p><span style="font-style: normal;">To access to RT we just had to enter the IP address onto the URL of the website. A breakthrough that we've been trying to achieve for a few weeks after running into a lot of errors with installation and following tutorials online.&nbsp;</span></p></blockquote>
             </div>
         </div>
     </div>
@@ -155,10 +166,20 @@
     <div class="container">
         <div class="media-container-row">
             <div class="mbr-text col-12 col-md-8 mbr-fonts-style display-7">
-                <blockquote><p><span style="font-style: normal;"><strong>Beta Release</strong></span></p></blockquote>
+                <blockquote><p><span style="font-style: normal;"><strong>Beta Release - I think</strong></span></p><p><span style="font-style: normal;">One of the things listed that needed to be done moving forward was for our ticketing site to have a domain. Discussions with Finn led to a conclusion that we may need to pay for an actual one ourselves. Before doing so we decided to ask Rob if there was any other solution. Thankfully he alowed us to use the 'op-bit.nz' domain. One of the main reasons being that the ticketing sytem would be an ongoing service that would be used in the future.&nbsp;</span></p><p><span style="font-style: normal;">To add a domain to the site Azure uses what is called a 'DNS Zone'. This allows custom domains to be added to that 'zone'. Our subscription already had dns zones created for us to there was no need to add our own one since we're using 'op-bit.nz'. From there we added our own record set and named it 'isaacrt.op-bit.nz'. At first it took a while to propagate but Mason suggested that we just adust the record set settings of TTL to '5' and TTL unit to 'minutes'.</span></p><p><span style="font-style: normal;">Another issue I noticed was that after 'DNS Propagation' I was only able to access using our domain name on mobile devices but couldn't on PC. I asked Rob and he said that 'That’ll be a sync issue. Azure DNS is meant to sync to OP and then to ICT, but it can take a while." So I decided to wait and see how it goes and check overnight.</span></p></blockquote>
             </div>
         </div>
     </div>
+</section>
+
+<section class="mbr-gallery mbr-slider-carousel cid-syiUHMnFn8" id="gallery2-16">
+
+    
+
+    <div>
+        <div><!-- Filter --><!-- Gallery --><div class="mbr-gallery-row"><div class="mbr-gallery-layout-default"><div><div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Awesome"><div href="#lb-gallery2-16" data-slide-to="0" data-toggle="modal"><img src="assets/images/dnszone-1-1099x372-800x271.png" alt="" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Responsive"><div href="#lb-gallery2-16" data-slide-to="1" data-toggle="modal"><img src="assets/images/dnszone-2-992x280-800x226.png" alt="" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Creative"><div href="#lb-gallery2-16" data-slide-to="2" data-toggle="modal"><img src="assets/images/dnszone-3-1624x310-800x153.png" alt="" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p2" data-video-url="false" data-tags="Creative"><div href="#lb-gallery2-16" data-slide-to="3" data-toggle="modal"><img src="assets/images/dnszone-4-752x468-752x468.png" alt="" title=""><span class="icon-focus"></span></div></div></div></div><div class="clearfix"></div></div></div><!-- Lightbox --><div data-app-prevent-settings="" class="mbr-slider modal fade carousel slide" tabindex="-1" data-keyboard="true" data-interval="false" id="lb-gallery2-16"><div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div class="carousel-inner"><div class="carousel-item"><img src="assets/images/dnszone-1-1099x372.png" alt="" title=""></div><div class="carousel-item"><img src="assets/images/dnszone-2-992x280.png" alt="" title=""></div><div class="carousel-item active"><img src="assets/images/dnszone-3-1624x310.png" alt="" title=""></div><div class="carousel-item"><img src="assets/images/dnszone-4-752x468.png" alt="" title=""></div></div><a class="carousel-control carousel-control-prev" role="button" data-slide="prev" href="#lb-gallery2-16"><span class="mbri-left mbr-iconfont" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control carousel-control-next" role="button" data-slide="next" href="#lb-gallery2-16"><span class="mbri-right mbr-iconfont" aria-hidden="true"></span><span class="sr-only">Next</span></a><a class="close" href="#" role="button" data-dismiss="modal"><span class="sr-only">Close</span></a></div></div></div></div></div>
+    </div>
+
 </section>
 
 <section class="mbr-section article content1 cid-syicVAfORx" id="content2-x">
@@ -174,16 +195,33 @@
     </div>
 </section>
 
+<section class="mbr-gallery mbr-slider-carousel cid-syj4jqgNdM" id="gallery2-18">
 
-  <script src="assets/web/assets/jquery/jquery.min.js"></script>
+    
+
+    <div>
+        <div><!-- Filter --><!-- Gallery --><div class="mbr-gallery-row"><div class="mbr-gallery-layout-default"><div><div><div class="mbr-gallery-item mbr-gallery-item--p5" data-video-url="false" data-tags="Awesome"><div href="#lb-gallery2-18" data-slide-to="0" data-toggle="modal"><img src="assets/images/createdkeyvault-1675x525-800x251.png" alt="" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p5" data-video-url="false" data-tags="Responsive"><div href="#lb-gallery2-18" data-slide-to="1" data-toggle="modal"><img src="assets/images/identity-vm-1908x658-800x276.png" alt="" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p5" data-video-url="false" data-tags="Creative"><div href="#lb-gallery2-18" data-slide-to="2" data-toggle="modal"><img src="assets/images/portalcreatedkeyvault-1904x266-800x112.png" alt="" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p5" data-video-url="false" data-tags="Creative"><div href="#lb-gallery2-18" data-slide-to="3" data-toggle="modal"><img src="assets/images/failed-create-key-1895x469-800x198.png" alt="" title=""><span class="icon-focus"></span></div></div><div class="mbr-gallery-item mbr-gallery-item--p5" data-video-url="false" data-tags="Creative"><div href="#lb-gallery2-18" data-slide-to="4" data-toggle="modal"><img src="assets/images/troubleshooting-certificateerror-1902x308-800x130.png" alt="" title=""><span class="icon-focus"></span></div></div></div></div><div class="clearfix"></div></div></div><!-- Lightbox --><div data-app-prevent-settings="" class="mbr-slider modal fade carousel slide" tabindex="-1" data-keyboard="true" data-interval="false" id="lb-gallery2-18"><div class="modal-dialog"><div class="modal-content"><div class="modal-body"><div class="carousel-inner"><div class="carousel-item"><img src="assets/images/createdkeyvault-1675x525.png" alt="" title=""></div><div class="carousel-item"><img src="assets/images/identity-vm-1908x658.png" alt="" title=""></div><div class="carousel-item active"><img src="assets/images/portalcreatedkeyvault-1904x266.png" alt="" title=""></div><div class="carousel-item"><img src="assets/images/failed-create-key-1895x469.png" alt="" title=""></div><div class="carousel-item"><img src="assets/images/troubleshooting-certificateerror-1902x308.png" alt="" title=""></div></div><a class="carousel-control carousel-control-prev" role="button" data-slide="prev" href="#lb-gallery2-18"><span class="mbri-left mbr-iconfont" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control carousel-control-next" role="button" data-slide="next" href="#lb-gallery2-18"><span class="mbri-right mbr-iconfont" aria-hidden="true"></span><span class="sr-only">Next</span></a><a class="close" href="#" role="button" data-dismiss="modal"><span class="sr-only">Close</span></a></div></div></div></div></div>
+    </div>
+
+</section>
+
+
   <script src="assets/popper/popper.min.js"></script>
+  <script src="assets/web/assets/jquery/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/tether/tether.min.js"></script>
-  <script src="assets/smoothscroll/smooth-scroll.js"></script>
+  <script src="assets/bootstrapcarouselswipe/bootstrap-carousel-swipe.js"></script>
   <script src="assets/dropdown/js/nav-dropdown.js"></script>
   <script src="assets/dropdown/js/navbar-dropdown.js"></script>
   <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
+  <script src="assets/masonry/masonry.pkgd.min.js"></script>
+  <script src="assets/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/smoothscroll/smooth-scroll.js"></script>
+  <script src="assets/tether/tether.min.js"></script>
+  <script src="assets/vimeoplayer/jquery.mb.vimeo_player.js"></script>
   <script src="assets/theme/js/script.js"></script>
+  <script src="assets/slidervideo/script.js"></script>
+  <script src="assets/gallery/player.min.js"></script>
+  <script src="assets/gallery/script.js"></script>
   
   
 </body>

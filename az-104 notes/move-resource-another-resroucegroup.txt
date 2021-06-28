@@ -1,0 +1,19 @@
+move resource from one rsg to another rsg
+
+yourResource=$(az resource show --resource-group <resource group name> --name <resource name> --resource-type "microsoft.compute/disks" --query id --output tsv)
+
+az resource list --resource-group <destination resource group name> --query [].type --output tsv | uniq
+
+
+sudo mkdir /mnt/share
+if [ ! -d "/etc/smbcredentials" ]; then
+sudo mkdir /etc/smbcredentials
+fi
+if [ ! -f "/etc/smbcredentials/azfilesroy.cred" ]; then
+    sudo bash -c 'echo "username=azfilesroy" >> /etc/smbcredentials/azfilesroy.cred'
+    sudo bash -c 'echo "password=OX09xKda2G1tyhEFCbhgq/WczhHsCsXFPSu30yeJNu0iJojSM03VebULwVH5OkeULoAUFih3vQGzCxrkxIQPaQ==" >> /etc/smbcredentials/azfilesroy.cred'
+fi
+sudo chmod 600 /etc/smbcredentials/azfilesroy.cred
+
+sudo bash -c 'echo "//azfilesroy.file.core.windows.net/share /mnt/share cifs nofail,vers=3.0,credentials=/etc/smbcredentials/azfilesroy.cred,dir_mode=0777,file_mode=0777,serverino" >> /etc/fstab'
+sudo mount -t cifs //azfilesroy.file.core.windows.net/share /mnt/share -o vers=3.0,credentials=/etc/smbcredentials/azfilesroy.cred,dir_mode=0777,file_mode=0777,serverino

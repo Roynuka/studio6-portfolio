@@ -1,0 +1,52 @@
+these commands are run using azure cli, a CLI client can be downloaded from the internet
+https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
+
+az vm create \
+  --resource-group student_ops \
+  --location australiaeast \
+  --name SampleVM \
+  --image UbuntuLTS \
+  --admin-username azureuser \
+  --generate-ssh-keys \
+  --verbose
+
+##can also specify size with
+--size "Standard_DS2_v2"
+
+
+##resize vm 
+
+az vm resize \
+    --resource-group learn-a37e7566-cef6-4268-b357-e7bd51368683 \
+    --name SampleVM \
+    --size Standard_D2s_v3
+
+##to view vm sizes 
+az vm list-vm-resize-options \
+    --resource-group (resouce group name) \
+    --name SampleVM \
+    --output table
+
+##note
+once vm creation is complete it will return a 'json' file
+
+##commands
+--generate-ssh-keys
+
+- this generates a pair of security keys so we can use 'ssh' to access the vm
+remotely
+
+##connect using ssh
+
+ssh azureuser@<public-ip-address>
+
+
+##To get VM ip address
+az vm list --output table
+
+az vm list-ip-addresses -n <name of vm> -o table
+
+#start/stop vm
+az vm start or az vm stop \
+    --name SampleVM \
+    --resource-group learn-a37e7566-cef6-4268-b357-e7bd51368683

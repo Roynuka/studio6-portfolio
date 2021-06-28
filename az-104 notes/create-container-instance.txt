@@ -1,0 +1,32 @@
+az container create \
+  --resource-group deploy-container \
+  --name mycontainer \
+  --image microsoft/aci-wordcount:latest \
+  --restart-policy OnFailure \
+  --dns-name-label $DNS_NAME_LABEL \
+  --location australiaeast
+
+az container show \
+  --resource-group deploy-container \
+  --name mycontainer \
+  --query "{FQDN:ipAddress.fqdn,ProvisioningState:provisioningState}" \
+  --output table
+
+#container restart policies
+
+az container create \
+  --resource-group deploy-container \
+  --name mycontainer-restart-demo \
+  --image microsoft/aci-wordcount:latest \
+  --restart-policy OnFailure \
+  --location australiaeast
+
+az container show \
+  --resource-group deploy-container \
+  --name mycontainer-restart-demo \
+  --query containers[0].instanceView.currentState.state
+
+#logs
+az container logs \
+  --resource-group deploy-container \
+  --name mycontainer-restart-demo

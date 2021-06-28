@@ -1,0 +1,148 @@
+Welcome to Azure Cloud Shell
+
+https://docs.microsoft.com/en-us/learn/modules/secure-your-azure-virtual-machine-disks/4-exercise-encrypt-existing-vm-disks
+
+Type "az" to use Azure CLI
+Type "help" to learn about Cloud Shell
+
+
+MOTD: To Connect and Manage Exchange Online: Connect-EXOPSSession
+
+VERBOSE: Authenticating to Azure ...
+VERBOSE: Building your Azure drive ...
+PS /home/roy> ll
+ll: The term 'll' is not recognized as the name of a cmdlet, function, script file, or operable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+PS /home/roy> dir
+
+
+    Directory: /home/roy
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+l----           11/5/2020  3:11 AM                clouddrive -> /usr/csuser/clouddrive
+
+PS /home/roy> $location = (Get-AzResourceGroup -name learn-e939a1bd-16df-4aac-ab3b-05a0f47dd589).location
+PS /home/roy> $vmName = "fmdata-vm01"
+PS /home/roy> $rgName = "learn-e939a1bd-16df-4aac-ab3b-05a0f47dd589"
+PS /home/roy> New-AzVm `
+>>     -ResourceGroupName $rgName `
+>>     -Name $vmName `
+>>     -Location $location `
+>>     -OpenPorts 3389
+cmdlet New-AzVM at command pipeline position 1Supply values for the following parameters:CredentialUser: azureadminPassword for user azureadmin: ******************
+
+
+ResourceGroupName        : learn-e939a1bd-16df-4aac-ab3b-05a0f47dd589
+Id                       : /subscriptions/9e2deb73-2f73-46d9-96f9-f94827200755/resourceGroups/learn-e939a1bd-16df-4a
+ac-ab3b-05a0f47dd589/providers/Microsoft.Compute/virtualMachines/fmdata-vm01
+VmId                     : 1a013428-aa00-4a46-ab74-61ace1ff655b
+Name                     : fmdata-vm01
+Type                     : Microsoft.Compute/virtualMachines
+Location                 : westus
+Tags                     : {}
+HardwareProfile          : {VmSize}
+NetworkProfile           : {NetworkInterfaces}
+OSProfile                : {ComputerName, AdminUsername, WindowsConfiguration, Secrets, AllowExtensionOperations,
+RequireGuestProvisionSignal}
+ProvisioningState        : Succeeded
+StorageProfile           : {ImageReference, OsDisk, DataDisks}
+FullyQualifiedDomainName : fmdata-vm01-127c09.westus.cloudapp.azure.com
+
+
+PS /home/roy> $vm = Get-AzVM -Name $vmName -ResourceGroupName $rgName
+PS /home/roy> $vm.StorageProfile.OSDisk
+
+OsType                  : Windows
+EncryptionSettings      :
+Name                    : fmdata-vm01_disk1_91b58150120443cfba8029f4b9d177a9
+Vhd                     :
+Image                   :
+Caching                 : ReadWrite
+WriteAcceleratorEnabled :
+DiffDiskSettings        :
+CreateOption            : FromImage
+DiskSizeGB              : 127
+ManagedDisk             : Microsoft.Azure.Management.Compute.Models.ManagedDiskParameters
+
+
+PS /home/roy> Get-AzVmDiskEncryptionStatus  `
+>>     -ResourceGroupName $rgName `
+>>     -VMName $vmName
+
+OsVolumeEncrypted          : NotEncrypted
+DataVolumesEncrypted       : NotEncrypted
+OsVolumeEncryptionSettings :
+ProgressMessage            : No Encryption extension or metadata found on the VM
+
+PS /home/roy> $keyVaultName = "mvmdsk-kv-1234"
+PS /home/roy> New-AzKeyVault -VaultName $keyVaultName `
+>>     -Location $location `
+>>     -ResourceGroupName $rgName `
+>>     -EnabledForDiskEncryption
+WARNING: Upcoming breaking changes in the cmdlet 'New-AzKeyVault' :
+The ability to create new key vaults with soft delete disabled will be deprecated by December 2020. All key vaults will be required to have soft delete enabled. Please see the following documentation for additional guidance. https://docs.microsoft.com/azure/key-vault/general/soft-delete-change
+Note : Go to https://aka.ms/azps-changewarnings for steps to suppress this breaking change warning, and other information on breaking changes in Azure PowerShell.
+New-AzKeyVault: The name 'mvmdsk-kv-1234' is already in use.
+PS /home/roy> $keyVaultName = "mvmdsk-kv-123456"
+PS /home/roy> New-AzKeyVault -VaultName $keyVaultName `
+>>     -Location $location `
+>>     -ResourceGroupName $rgName `
+>>     -EnabledForDiskEncryption
+WARNING: Upcoming breaking changes in the cmdlet 'New-AzKeyVault' :
+The ability to create new key vaults with soft delete disabled will be deprecated by December 2020. All key vaults will be required to have soft delete enabled. Please see the following documentation for additional guidance. https://docs.microsoft.com/azure/key-vault/general/soft-delete-change
+Note : Go to https://aka.ms/azps-changewarnings for steps to suppress this breaking change warning, and other information on breaking changes in Azure PowerShell.
+
+Vault Name                          : mvmdsk-kv-123456
+Resource Group Name                 : learn-e939a1bd-16df-4aac-ab3b-05a0f47dd589
+Location                            : westus
+Resource ID                         : /subscriptions/9e2deb73-2f73-46d9-96f9-f94827200755/resourceGroups/learn-e939a
+                                      1bd-16df-4aac-ab3b-05a0f47dd589/providers/Microsoft.KeyVault/vaults/mvmdsk-kv-
+                                      123456
+Vault URI                           : https://mvmdsk-kv-123456.vault.azure.net/
+Tenant ID                           : 604c1504-c6a3-4080-81aa-b33091104187
+SKU                                 : Standard
+Enabled For Deployment?             : False
+Enabled For Template Deployment?    : False
+Enabled For Disk Encryption?        : True
+Enabled For RBAC Authorization?     : False
+Soft Delete Enabled?                : True
+Soft Delete Retention Period (days) : 90
+Access Policies                     :
+Network Rule Set                    :
+                                      Default Action                             : Allow
+                                      Bypass                                     : AzureServices
+                                      IP Rules                                   :
+                                      Virtual Network Rules                      :
+
+Tags                                :
+
+WARNING: Access policy is not set. No user or application have access permission to use this vault. This can happen if the vault was created by a service principal. Please use Set-AzKeyVaultAccessPolicy to set access policies.
+
+PS /home/roy> $keyVault = Get-AzKeyVault `
+>>     -VaultName $keyVaultName `
+>>     -ResourceGroupName $rgName
+PS /home/roy> Set-AzVmDiskEncryptionExtension `
+>> -ResourceGroupName $rgName `
+>>     -VMName $vmName `
+>>     -VolumeType All `
+>> -DiskEncryptionKeyVaultId $keyVault.ResourceId `
+>> -DiskEncryptionKeyVaultUrl $keyVault.VaultUri `
+>>     -SkipVmBackup
+
+Enable AzureDiskEncryption on the VM
+This cmdlet prepares the VM and enables encryption which may reboot the machine and takes 10-15 minutes to finish.
+Please save your work on the VM before confirming. Do you want to continue?
+[Y] Yes  [N] No  [S] Suspend  [?] Help (default is "Y"): Y
+
+RequestId IsSuccessStatusCode StatusCode ReasonPhrase
+--------- ------------------- ---------- ------------
+                         True         OK OK
+
+PS /home/roy>
+PS /home/roy> Get-AzVmDiskEncryptionStatus  -ResourceGroupName $rgName -VMName $vmName
+
+OsVolumeEncrypted          : Encrypted
+DataVolumesEncrypted       : NoDiskFound
+OsVolumeEncryptionSettings : Microsoft.Azure.Management.Compute.Models.DiskEncryptionSettings
+ProgressMessage            : [2.2.0.35]

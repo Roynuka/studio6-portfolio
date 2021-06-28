@@ -1,0 +1,178 @@
+
+Set up some variables
+
+$myRgName = "learn-8a48fc71-7bc5-4e68-a3ca-7b730107bdb2"
+$myVMName = "fotoshareVM"
+
+$myVM = Get-AzVM -ResourceGroupName $myRgName -VMName $myVmName
+$myVM | select-object -property ResourceGroupName, Name, Type, Location
+
+outcome:
+ResourceGroupName                          Name        Type                              Location
+-----------------                          ----        ----                              --------
+learn-8a48fc71-7bc5-4e68-a3ca-7b730107bdb2 fotoshareVM Microsoft.Compute/virtualMachines westus
+
+
+View OS disk cache status
+$myVM.StorageProfile.OsDisk.Caching
+
+outcome:
+PS /home/roy809> $myVM.StorageProfile.OsDisk.Caching
+ReadOnly
+
+
+
+Change the cache settings of the OS disk
+changing vm disk from ReadOnly to ReadWrite
+$myVM.StorageProfile.OsDisk.Caching = "ReadWrite"
+
+update the vm 
+Update-AzVM -ResourceGroupName $myRGName -VM $myVM
+
+RequestId IsSuccessStatusCode StatusCode ReasonPhrase
+--------- ------------------- ---------- ------------
+                         True         OK OK
+
+
+Outcome
+
+PS /home/roy809> $myVM.StorageProfile.OsDisk.Caching
+ReadOnly
+PS /home/roy809> $myVM.StorageProfile.OsDisk.Caching = "ReadWrite"
+PS /home/roy809> Update-AzVM -ResourceGroupName $myRGName -VM $myVM
+
+RequestId IsSuccessStatusCode StatusCode ReasonPhrase
+--------- ------------------- ---------- ------------
+                         True         OK OK						 
+						 
+
+Check the vm disk cache settings						 
+$myVM = Get-AzVM -ResourceGroupName $myRgName -VMName $myVmName
+$myVM.StorageProfile.OsDisk.Caching
+ReadWrite
+
+outcome:                         True         OK OK
+
+PS /home/roy809> $myVM = Get-AzVM -ResourceGroupName $myRgName -VMName $myVmName
+PS /home/roy809> $myVM.StorageProfile.OsDisk.Caching
+ReadWrite
+
+
+List data disk info
+$myVM.StorageProfile.DataDisks
+
+
+outcome:
+PS /home/roy809> $myVM.StorageProfile.DataDisks
+
+Name            : fotoshareVM-data
+DiskSizeGB      : 1023
+Lun             : 0
+Caching         : ReadOnly
+CreateOption    : Attach
+SourceImage     :
+VirtualHardDisk :
+
+
+
+Add a data disk to the VM
+store our new disk name
+$newDiskName = "fotoshareVM-data2"
+
+Add-AzVMDataDisk command to define a new empty 1 GB data disk
+Add-AzVMDataDisk -VM $myVM -Name $newDiskName  -LUN 1  -DiskSizeinGB 1 -CreateOption Empty
+
+outcome:
+PS /home/roy809> $newDiskName = "fotoshareVM-data2"
+PS /home/roy809> Add-AzVMDataDisk -VM $myVM -Name $newDiskName  -LUN 1  -DiskSizeinGB 1 -CreateOption Empty
+
+
+ResourceGroupName  : learn-8a48fc71-7bc5-4e68-a3ca-7b730107bdb2
+Id                 : /subscriptions/839d39d5-54a4-46db-9cc6-bba178fde996/resourceGroups/learn-8a48fc71-7bc5-4e68-a3c
+a-7b730107bdb2/providers/Microsoft.Compute/virtualMachines/fotoshareVM
+VmId               : e8dfdd04-a799-4891-af70-76d14ec4053f
+Name               : fotoshareVM
+Type               : Microsoft.Compute/virtualMachines
+Location           : westus
+Tags               : {}
+DiagnosticsProfile : {BootDiagnostics}
+Extensions         : {DependencyAgentWindows, MicrosoftMonitoringAgent}
+HardwareProfile    : {VmSize}
+NetworkProfile     : {NetworkInterfaces}
+OSProfile          : {ComputerName, AdminUsername, WindowsConfiguration, Secrets, AllowExtensionOperations,
+RequireGuestProvisionSignal}
+ProvisioningState  : Succeeded
+StorageProfile     : {ImageReference, OsDisk, DataDisks}
+
+
+update the vm to activr our new data disk
+
+PS /home/roy809> Update-AzVM -ResourceGroupName $myRGName -VM $myVM
+
+RequestId IsSuccessStatusCode StatusCode ReasonPhrase
+--------- ------------------- ---------- ------------
+                         True         OK OK
+
+
+Check out our new disk
+$myVM.StorageProfile.DataDisks
+
+outcome : 
+PS /home/roy809> $myVM.StorageProfile.DataDisks
+
+Name            : fotoshareVM-data
+DiskSizeGB      : 1023
+Lun             : 0
+Caching         : ReadOnly
+CreateOption    : Attach
+SourceImage     :
+VirtualHardDisk :
+
+Name            : fotoshareVM-data2
+DiskSizeGB      : 1
+Lun             : 1
+Caching         : None
+CreateOption    : Empty
+SourceImage     :
+VirtualHardDisk :
+
+Change caching type on a new data disk
+
+modify properties of a virtual machine data disk with the Set-AzVMDataDisk cmdlet
+Set-AzVMDataDisk -VM $myVM -Lun "1" -Caching ReadWrite
+
+outcome:
+PS /home/roy809> Set-AzVMDataDisk -VM $myVM -Lun "1" -Caching ReadWrite
+
+
+ResourceGroupName  : learn-8a48fc71-7bc5-4e68-a3ca-7b730107bdb2
+Id                 : /subscriptions/839d39d5-54a4-46db-9cc6-bba178fde996/resourceGroups/learn-8a48fc71-7bc5-4e68-a3c
+a-7b730107bdb2/providers/Microsoft.Compute/virtualMachines/fotoshareVM
+VmId               : e8dfdd04-a799-4891-af70-76d14ec4053f
+Name               : fotoshareVM
+Type               : Microsoft.Compute/virtualMachines
+Location           : westus
+Tags               : {}
+DiagnosticsProfile : {BootDiagnostics}
+Extensions         : {DependencyAgentWindows, MicrosoftMonitoringAgent}
+HardwareProfile    : {VmSize}
+NetworkProfile     : {NetworkInterfaces}
+OSProfile          : {ComputerName, AdminUsername, WindowsConfiguration, Secrets, AllowExtensionOperations,
+RequireGuestProvisionSignal}
+ProvisioningState  : Succeeded
+StorageProfile     : {ImageReference, OsDisk, DataDisks}
+
+commit the changes with Update-AzVM
+Update-AzVM -ResourceGroupName $myRGName -VM $myVM
+
+outcome:
+PS /home/roy809> Update-AzVM -ResourceGroupName $myRGName -VM $myVM
+
+outcome:
+RequestId IsSuccessStatusCode StatusCode ReasonPhrase
+--------- ------------------- ---------- ------------
+                         True         OK OK
+						 
+Go back to Azure Protal to check the disk we just created.
+			
+

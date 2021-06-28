@@ -1,0 +1,308 @@
+Requesting a Cloud Shell.Succeeded.
+Connecting terminal...
+
+Welcome to Azure Cloud Shell
+
+Type "az" to use Azure CLI
+Type "help" to learn about Cloud Shell
+
+roy@Azure:~$
+roy@Azure:~$
+roy@Azure:~$ export RESOURCE_GROUP=learn-019dcec0-b4dd-4fcf-96f6-2c317375e087
+roy@Azure:~$ export AZURE_REGION=centralus
+roy@Azure:~$ export AZURE_APP_PLAN=popupappplan-$RANDOM
+roy@Azure:~$ export AZURE_WEB_APP=popupwebapp-$RANDOM'
+> ^C
+roy@Azure:~$ ^C
+roy@Azure:~$ ^C
+roy@Azure:~$ export AZURE_WEB_APP=popupwebapp-$RANDOM
+roy@Azure:~$ az group list --output table
+Name                                        Location    Status
+------------------------------------------  ----------  ---------
+learn-019dcec0-b4dd-4fcf-96f6-2c317375e087  westus      Succeeded
+roy@Azure:~$ az group list --query "[?name == 'learn-019dcec0-b4dd-4fcf-96f6-2c317375e087']"[
+  {
+    "id": "/subscriptions/3ee58741-26f4-45f3-b3da-0fa1ca272b29/resourceGroups/learn-019dcec0-b4dd-4fcf-96f6-2c317375e087",
+    "location": "westus",
+    "managedBy": null,
+    "name": "learn-019dcec0-b4dd-4fcf-96f6-2c317375e087",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": {
+      "x-created-by": "freelearning",
+      "x-created-for": "f34e4e85-f713-4c78-9a60-9ca93438f82a",
+      "x-module-id": "learn.control-azure-services-with-cli"
+    },
+    "type": "Microsoft.Resources/resourceGroups"  }]
+roy@Azure:~$ az appservice plan create --name $MyPLAN --resource-group learn-019dcec0-b4dd-4fcf-96f6-2c317375e087 --location westus --sku FREE
+ArgumentParseError: argument --name/-n: expected one argument
+Try this: 'az appservice plan create --name MyPlan --resource-group MyResourceGroup --sku F1'
+Still stuck? Run 'az appservice plan create --help' to view all commands or go to 'https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest' to learn more
+roy@Azure:~$ az appservice plan create --name MyPLAN --resource-group learn-019dcec0-b4dd-4fcf-96f6-2c317375e087 --location westus --sku FREE
+{- Finished ..
+  "freeOfferExpirationTime": null,
+  "geoRegion": "West US",
+  "hostingEnvironmentProfile": null,
+  "hyperV": false,
+  "id": "/subscriptions/3ee58741-26f4-45f3-b3da-0fa1ca272b29/resourceGroups/learn-019dcec0-b4dd-4fcf-96f6-2c317375e087/providers/Microsoft.Web/serverfarms/Myplan",
+  "isSpot": false,
+  "isXenon": false,
+  "kind": "app",
+  "location": "westus",
+  "maximumElasticWorkerCount": 1,
+  "maximumNumberOfWorkers": 1,
+  "name": "Myplan",
+  "numberOfSites": 0,
+  "perSiteScaling": false,
+  "provisioningState": null,
+  "reserved": false,
+  "resourceGroup": "learn-019dcec0-b4dd-4fcf-96f6-2c317375e087",
+  "sku": {
+    "capabilities": null,
+    "capacity": 0,
+    "family": "F",
+    "locations": null,
+    "name": "F1",
+    "size": "F1",
+    "skuCapacity": null,
+    "tier": "Free"
+  },
+  "spotExpirationTime": null,
+  "status": "Ready",
+  "subscription": "3ee58741-26f4-45f3-b3da-0fa1ca272b29",
+  "tags": null,
+  "targetWorkerCount": 0,
+  "targetWorkerSizeId": 0,
+  "type": "Microsoft.Web/serverfarms",
+  "workerTierName": null
+}
+roy@Azure:~$ az appservice plan list --output table
+HyperV    IsSpot    IsXenon    Kind    Location    MaximumElasticWorkerCount    MaximumNumberOfWorkers    Name    NumberOfSites    PerSiteScaling    Reserved    ResourceGroup                               Status    TargetWorkerCount  TargetWorkerSizeId
+--------  --------  ---------  ------  ----------  ---------------------------  ------------------------  ------  ---------------  ----------------  ----------  ------------------------------------------  --------  -------------------  --------------------
+False     False     False      app     West US     1                            1                         Myplan  0              False             False       learn-019dcec0-b4dd-4fcf-96f6-2c317375e087  Ready     0  0
+roy@Azure:~$ az webapp create --name AZURE_WEP_APP --resource-group learn-019dcec0-b4dd-4fcf-96f6-2c317375e087--plan MyPLAN
+RequiredArgumentMissingError: the following arguments are required: --plan/-p
+Try this: 'az webapp create -g MyResourceGroup -p MyPlan -n MyUniqueAppName'
+Still stuck? Run 'az webapp create --help' to view all commands or go to 'https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest' to learn more
+roy@Azure:~$ az webapp create --name AZURE_WEP_APP --resource-group learn-019dcec0-b4dd-4fcf-96f6-2c317375e087 --plan MyPLAN
+Hostname must be less than 64 chars and must follow allowed character guidelines at http://tools.ietf.org/html/rfc952.
+roy@Azure:~$ az webapp create --name MYWEBAPP --resource-group learn-019dcec0-b4dd-4fcf-96f6-2c317375e087 --plan MyPLAN
+Webapp 'MYWEBAPP' already exists. The command will use the existing app's settings.
+Unable to retrieve details of the existing app 'MYWEBAPP'. Please check that the app is a part of the current subscription
+roy@Azure:~$ az webapp create --name MYWEBAPPNZ --resource-group learn-019dcec0-b4dd-4fcf-96f6-2c317375e087 --plan MyPLAN
+
+
+
+{- Finished ..
+  "availabilityState": "Normal",
+  "clientAffinityEnabled": true,
+  "clientCertEnabled": false,
+  "clientCertExclusionPaths": null,
+  "cloningInfo": null,
+  "containerSize": 0,
+  "dailyMemoryTimeQuota": 0,
+  "defaultHostName": "mywebappnz.azurewebsites.net",
+  "enabled": true,
+  "enabledHostNames": [
+    "mywebappnz.azurewebsites.net",
+    "mywebappnz.scm.azurewebsites.net"
+  ],
+  "ftpPublishingUrl": "ftp://waws-prod-bay-027.ftp.azurewebsites.windows.net/site/wwwroot",
+  "hostNameSslStates": [
+    {
+      "hostType": "Standard",
+      "ipBasedSslResult": null,
+      "ipBasedSslState": "NotConfigured",
+      "name": "mywebappnz.azurewebsites.net",
+      "sslState": "Disabled",
+      "thumbprint": null,
+      "toUpdate": null,
+      "toUpdateIpBasedSsl": null,
+      "virtualIp": null
+    },
+    {
+      "hostType": "Repository",
+      "ipBasedSslResult": null,
+      "ipBasedSslState": "NotConfigured",
+      "name": "mywebappnz.scm.azurewebsites.net",
+      "sslState": "Disabled",
+      "thumbprint": null,
+      "toUpdate": null,
+      "toUpdateIpBasedSsl": null,
+      "virtualIp": null
+    }
+  ],
+  "hostNames": [
+    "mywebappnz.azurewebsites.net"
+  ],
+  "hostNamesDisabled": false,
+  "hostingEnvironmentProfile": null,
+  "httpsOnly": false,
+  "hyperV": false,
+  "id": "/subscriptions/3ee58741-26f4-45f3-b3da-0fa1ca272b29/resourceGroups/learn-019dcec0-b4dd-4fcf-96f6-2c317375e087/providers/Microsoft.Web/sites/MYWEBAPPNZ",
+  "identity": null,
+  "inProgressOperationId": null,
+  "isDefaultContainer": null,
+  "isXenon": false,
+  "kind": "app",
+  "lastModifiedTimeUtc": "2020-11-01T03:19:06.720000",
+  "location": "West US",
+  "maxNumberOfWorkers": null,
+  "name": "MYWEBAPPNZ",
+  "outboundIpAddresses": "191.239.57.218,191.239.58.113,191.239.58.48,191.239.60.207,104.42.157.126,104.42.159.97,104.42.157.47,104.42.153.62",
+  "possibleOutboundIpAddresses": "191.239.57.218,191.239.58.113,191.239.58.48,191.239.60.207,104.42.157.126,104.42.159.97,104.42.157.47,104.42.153.62,40.80.155.141,13.93.204.85,13.93.204.96,13.93.204.98,13.93.204.111,13.93.204.120,13.93.204.122,13.93.204.128,13.93.204.137,191.239.58.162,40.112.243.10",
+  "redundancyMode": "None",
+  "repositorySiteName": "MYWEBAPPNZ",
+  "reserved": false,
+  "resourceGroup": "learn-019dcec0-b4dd-4fcf-96f6-2c317375e087",
+  "scmSiteAlsoStopped": false,
+  "serverFarmId": "/subscriptions/3ee58741-26f4-45f3-b3da-0fa1ca272b29/resourceGroups/learn-019dcec0-b4dd-4fcf-96f6-2c317375e087/providers/Microsoft.Web/serverfarms/Myplan",
+  "siteConfig": {
+    "acrUseManagedIdentityCreds": false,
+    "acrUserManagedIdentityId": null,
+    "alwaysOn": null,
+    "apiDefinition": null,
+    "apiManagementConfig": null,
+    "appCommandLine": null,
+    "appSettings": null,
+    "autoHealEnabled": null,
+    "autoHealRules": null,
+    "autoSwapSlotName": null,
+    "azureMonitorLogCategories": null,
+    "azureStorageAccounts": null,
+    "connectionStrings": null,
+    "cors": null,
+    "customAppPoolIdentityAdminState": null,
+    "customAppPoolIdentityTenantState": null,
+    "defaultDocuments": null,
+    "detailedErrorLoggingEnabled": null,
+    "documentRoot": null,
+    "experiments": null,
+    "fileChangeAuditEnabled": null,
+    "ftpsState": null,
+    "functionAppScaleLimit": null,
+    "functionsRuntimeScaleMonitoringEnabled": null,
+    "handlerMappings": null,
+    "healthCheckPath": null,
+    "http20Enabled": null,
+    "httpLoggingEnabled": null,
+    "ipSecurityRestrictions": [
+      {
+        "action": "Allow",
+        "description": "Allow all access",
+        "ipAddress": "Any",
+        "name": "Allow all",
+        "priority": 1,
+        "subnetMask": null,
+        "subnetTrafficTag": null,
+        "tag": null,
+        "vnetSubnetResourceId": null,
+        "vnetTrafficTag": null
+      }
+    ],
+    "javaContainer": null,
+    "javaContainerVersion": null,
+    "javaVersion": null,
+    "limits": null,
+    "linuxFxVersion": null,
+    "loadBalancing": null,
+    "localMySqlEnabled": null,
+    "logsDirectorySizeLimit": null,
+    "machineKey": null,
+    "managedPipelineMode": null,
+    "managedServiceIdentityId": null,
+    "metadata": null,
+    "minTlsVersion": null,
+    "minimumElasticInstanceCount": 0,
+    "netFrameworkVersion": null,
+    "nodeVersion": null,
+    "numberOfWorkers": null,
+    "phpVersion": null,
+    "powerShellVersion": null,
+    "preWarmedInstanceCount": null,
+    "publishingPassword": null,
+    "publishingUsername": null,
+    "push": null,
+    "pythonVersion": null,
+    "remoteDebuggingEnabled": null,
+    "remoteDebuggingVersion": null,
+    "requestTracingEnabled": null,
+    "requestTracingExpirationTime": null,
+    "routingRules": null,
+    "runtimeADUser": null,
+    "runtimeADUserPassword": null,
+    "scmIpSecurityRestrictions": [
+      {
+        "action": "Allow",
+        "description": "Allow all access",
+        "ipAddress": "Any",
+        "name": "Allow all",
+        "priority": 1,
+        "subnetMask": null,
+        "subnetTrafficTag": null,
+        "tag": null,
+        "vnetSubnetResourceId": null,
+        "vnetTrafficTag": null
+      }
+    ],
+    "scmIpSecurityRestrictionsUseMain": null,
+    "scmMinTlsVersion": null,
+    "scmType": null,
+    "tracingOptions": null,
+    "use32BitWorkerProcess": null,
+    "virtualApplications": null,
+    "vnetName": null,
+    "vnetPrivatePortsCount": null,
+    "vnetRouteAllEnabled": null,
+    "webSocketsEnabled": null,
+    "websiteTimeZone": null,
+    "winAuthAdminState": null,
+    "winAuthTenantState": null,
+    "windowsFxVersion": null,
+    "xManagedServiceIdentityId": null
+  },
+  "slotSwapStatus": null,
+  "state": "Running",
+  "suspendedTill": null,
+  "tags": null,
+  "targetSwapSlot": null,
+  "trafficManagerHostNames": null,
+  "type": "Microsoft.Web/sites",
+  "usageState": "Normal"
+}
+roy@Azure:~$
+roy@Azure:~$
+roy@Azure:~$
+roy@Azure:~$ az webapp list --output
+ArgumentParseError: argument --output/-o: expected one argument
+Try this: 'az webapp list --resource-group myresourcegroup'
+Still stuck? Run 'az webapp list --help' to view all commands or go to 'https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest' to learn more
+roy@Azure:~$ az webapp list --output table
+Name        Location    State    ResourceGroup                               DefaultHostName               AppServicePlan
+----------  ----------  -------  ------------------------------------------  ----------------------------  ----------------
+MYWEBAPPNZ  West US     Running  learn-019dcec0-b4dd-4fcf-96f6-2c317375e087  mywebappnz.azurewebsites.net  Myplan
+roy@Azure:~$ curl mywebappnz.azurewebsites.net
+﻿<!DOCTYPE html><html lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, iniial-scale=1.0"> <meta http-equiv=X-UA-Compatible content="IE=edge"> <title>Microsoft Azure App Service - Welcome</title> <link rel="shortcut icon" href="https://appservice.azureedge.net/images/app-service/v3/favicon.ico" type="image/x-icon"/> <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.1.1/css/bootstrap.min.css" crossorigin="anonymous"> <link rel="stylesheet" type="text/css" href="https://appservice.azureedge.net/css/app-service/v3/main.css"> <script src="https://appservice.azureedge.net/scripts/app-service/v3/loc.min.js" crossorigin="anonymous"></script> <script type="text/javascript">window.onload=function (){try{var a=window.location.hostname; if (a.includes(".azurewebsites.net")){a=a.replace(".azurewebsites.net", "")}var b=document.getElementById("depCenterLink1"); b.setAttribute("href", b.getAttribute("href") + "&sitename=" + a); loc();}catch (d){}}</script></head><body> <nav class="navbar navbar-light bg-light"> <div class="navbar-brand "> <div class="container pl-4 ml-5"> <img src="https://appservice.azureedge.net/images/app-service/v3/microsoft_azure_logo.svg" width="270" height="108" alt=""> </div></div></nav> <div class="container-fluid container-height mr-2"> <div class="pt-10 pb-10 mt-10 mb-10 d-xxs-none d-xs-none d-sm-none d-md-none d-lg-block d-xl-block" style="height:20px; width:100%; clear:both;"></div><div class="row"> <div class="row col-xs-12 col-sm-12 d-block d-lg-none d-xl-none d-md-block d-sm-block d-xs-block"> <div class="text-center"> <img src="https://appservice.azureedge.net/images/app-service/v3/generic.svg"> </div></div><div class=" extra-pl-small-scr offset-xl-1 offset-lg-1 offset-md-2 offset-sm-2 offset-xs-4 col-xl-5 col-lg-5 col-md-10 col-sm-11 col-xs-11 div-vertical-center"> <div class="container-fluid"> <div class="row"> <h2 id="heyDevelopers">Hey, App Service developers!</h2> </div><br><div class="row"> <h4 id="upRunning">Your app service is up and running.</h4> </div><div class="row"> <h4 id="nextSteps">Time to take the next step and deploy your code.</h4> </div><div class="row info-mg-top"> <p class=" pl-0 col-md-6 col-sm-12 info-mg-top"><span id="codeReady">Have your code ready?</span><br><span id="useDCenter"> Use deployment center to get code published from your client or setup continuous deployment.</span><br><a id="depCenterLink1" href="https://go.microsoft.com/fwlink/?linkid=2057852"><button class="btn btn-primary btn-mg-top" type="submit" id="deplCenter">Deployment Center</button></a></p><p class="pl-0 offset-md-1 col-md-5 col-sm-12 info-mg-top"> <span id="codeNotReady">Don't have your code yet?</span><br><span id="followQS">Follow our quickstart guide and you'll have a full app ready in 5 minutes or less.</span> <br><a href="https://go.microsoft.com/fwlink/?linkid=2084231"><button class="btn btn-primary btn-mg-top" type="submit" id="quickStart">Quickstart</button></a></p></div></div></div><div class="col-xl-5 col-lg-5 col-md-12 d-none d-lg-block"> <div class="text-center"><img src="https://appservice.azureedge.net/images/app-service/v3/generic.svg"> </div></div><div class="col-xl-1 col-lg-1 col-md-1"></div></div></div><script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.2.1.min.js" crossorigin="anonymous"></script> <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.1.1/bootstrap.min.js" crossorigin="anonymous"></script></body></html>roy@Azf6-2c317375e087p depolyment source config --name MYWEBAPPNZ --resource-group learn-019dcec0-b4dd-4fcf-96
+^[[ACommandNotFoundError: 'depolyment' is misspelled or not recognized by the system.
+Did you mean 'deployment' ?
+Still stuck? Run 'az webapp --help' to view all commands or go to 'https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest' to learn more
+roy@Azure:~$ az webapp depolyment source config --name MYWEBAPPNZ --resource-group learn-019dcec0-b4dd-4fcf-96f6-2c317375e087 --repo-url "https://github.com/Azure-Samples/php-docs-hello-world" --branch master --manual-integration
+CommandNotFoundError: 'depolyment' is misspelled or not recognized by the system.
+Did you mean 'deployment' ?
+Still stuck? Run 'az webapp --help' to view all commands or go to 'https://docs.microsoft.com/en-us/cli/azure/reference-index?view=azure-cli-latest' to learn more
+roy@Azure:~$ az webapp deployment source config --name MYWEBAPPNZ --resource-group learn-019dcec0-b4dd-4fcf-96f6-2c317375e087 --repo-url "https://github.com/Azure-Samples/php-docs-hello-world" --branch master --manual-integration
+{- Finished ..
+  "branch": "master",
+  "deploymentRollbackEnabled": false,
+  "id": "/subscriptions/3ee58741-26f4-45f3-b3da-0fa1ca272b29/resourceGroups/learn-019dcec0-b4dd-4fcf-96f6-2c317375e087/providers/Microsoft.Web/sites/MYWEBAPPNZ/sourcecontrols/web",
+  "isManualIntegration": true,
+  "isMercurial": false,
+  "kind": null,
+  "location": "West US",
+  "name": "MYWEBAPPNZ",
+  "repoUrl": "https://github.com/Azure-Samples/php-docs-hello-world",
+  "resourceGroup": "learn-019dcec0-b4dd-4fcf-96f6-2c317375e087",
+  "type": "Microsoft.Web/sites/sourcecontrols"
+}
+roy@Azure:~$ curl mywebappnz.azurewebsites.netHello World!roy@Azure:~$

@@ -1,0 +1,177 @@
+roy@Azure:~$ az vmss show \
+>     --name webServerScaleSet \
+>     --resource-group scalesetrg \
+>     --query upgradePolicy.mode
+"Automatic"
+roy@Azure:~$ az vmss extension set \
+>     --publisher Microsoft.Azure.Extensions \
+>     --version 2.0 \
+>     --name CustomScript \
+>     --vmss-name webServerScaleSet \
+>     --resource-group scalesetrg \
+>     --settings "{\"commandToExecute\": \"echo This is the updated app installed on the Virtual Machine Scale Set ! > /var/www/html/index.html\"}"
+{- Finished ..
+  "additionalCapabilities": null,
+  "automaticRepairsPolicy": null,
+  "doNotRunExtensionsOnOverprovisionedVms": false,
+  "hostGroup": null,
+  "id": "/subscriptions/cadf6f2b-8537-4829-aede-75fc90459ce0/resourceGroups/scalesetrg/providers/Microsoft.Compute/virtualMachineScaleSets/webServerScaleSet",
+  "identity": null,
+  "location": "westus",
+  "name": "webServerScaleSet",
+  "overprovision": true,
+  "plan": null,
+  "platformFaultDomainCount": null,
+  "provisioningState": "Succeeded",
+  "proximityPlacementGroup": null,
+  "resourceGroup": "scalesetrg",
+  "scaleInPolicy": null,
+  "singlePlacementGroup": true,
+  "sku": {
+    "capacity": 1,
+    "name": "Standard_DS1_v2",
+    "tier": "Standard"
+  },
+  "tags": {},
+  "type": "Microsoft.Compute/virtualMachineScaleSets",
+  "uniqueId": "68e178e5-b495-4dc6-9bfb-316c68337c36",
+  "upgradePolicy": {
+    "automaticOsUpgradePolicy": null,
+    "mode": "Automatic",
+    "rollingUpgradePolicy": null
+  },
+  "virtualMachineProfile": {
+    "billingProfile": null,
+    "diagnosticsProfile": null,
+    "evictionPolicy": null,
+    "extensionProfile": {
+      "extensions": [
+        {
+          "autoUpgradeMinorVersion": true,
+          "enableAutomaticUpgrade": null,
+          "forceUpdateTag": null,
+          "id": null,
+          "name": "CustomScript",
+          "protectedSettings": null,
+          "provisionAfterExtensions": null,
+          "provisioningState": null,
+          "publisher": "Microsoft.Azure.Extensions",
+          "settings": {
+            "commandToExecute": "echo This is the updated app installed on the Virtual Machine Scale Set ! > /var/www/html/index.html"
+          },
+          "type": null,
+          "type1": "CustomScript",
+          "typeHandlerVersion": "2.0"
+        }
+      ],
+      "extensionsTimeBudget": null
+    },
+    "licenseType": null,
+    "networkProfile": {
+      "healthProbe": null,
+      "networkInterfaceConfigurations": [
+        {
+          "dnsSettings": {
+            "dnsServers": []
+          },
+          "enableAcceleratedNetworking": false,
+          "enableIpForwarding": false,
+          "id": null,
+          "ipConfigurations": [
+            {
+              "applicationGatewayBackendAddressPools": null,
+              "applicationSecurityGroups": null,
+              "id": null,
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "/subscriptions/cadf6f2b-8537-4829-aede-75fc90459ce0/resourceGroups/scalesetrg/providers/Microsoft.Network/loadBalancers/webServerScaleSetLB/backendAddressPools/webServerScaleSetLBBEPool",
+                  "resourceGroup": "scalesetrg"
+                }
+              ],
+              "loadBalancerInboundNatPools": [
+                {
+                  "id": "/subscriptions/cadf6f2b-8537-4829-aede-75fc90459ce0/resourceGroups/scalesetrg/providers/Microsoft.Network/loadBalancers/webServerScaleSetLB/inboundNatPools/webServerScaleSetLBNatPool",
+                  "resourceGroup": "scalesetrg"
+                }
+              ],
+              "name": "webseb368IPConfig",
+              "primary": null,
+              "privateIpAddressVersion": "IPv4",
+              "publicIpAddressConfiguration": null,
+              "subnet": {
+                "id": "/subscriptions/cadf6f2b-8537-4829-aede-75fc90459ce0/resourceGroups/scalesetrg/providers/Microsoft.Network/virtualNetworks/webServerScaleSetVNET/subnets/webServerScaleSetSubnet",
+                "resourceGroup": "scalesetrg"
+              }
+            }
+          ],
+          "name": "webseb368Nic",
+          "networkSecurityGroup": null,
+          "primary": true
+        }
+      ]
+    },
+    "osProfile": {
+      "adminPassword": null,
+      "adminUsername": "azureuser",
+      "allowExtensionOperations": true,
+      "computerNamePrefix": "webseb368",
+      "customData": null,
+      "linuxConfiguration": {
+        "disablePasswordAuthentication": true,
+        "provisionVmAgent": true,
+        "ssh": {
+          "publicKeys": [
+            {
+              "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4oNPoOLw2tT0yeu5kZsi+gr9BTcgdG7LXJFl8SAVieQTblBrzxrZttDtcA3ZlJPEwXEVEl1/C5MWXl7/51n2NSpWSvRKUySqzM76FP7FtsH/ihuF0lJ9GS5tlT6wUZqUGU4x3pF81fD1oMy2E95Bt4RMB3QBZnMvpj6ZZc+aUcqOf2n01eTCtzdmUkDIOKSSCJPDNrKv5LWzcY2u0gHpR4/bS+MS6HnQHWVFdp1bARpLZa8TU+JF6FQeA4Cp9EDb8H6onnCFteAYExqp7ZQCqxzISY2isbjiQT5Hw3ftgxvym1G3ErKHm0/nByy4tzaBX3v3Y7Scb7MGoRGyEwykf",
+              "path": "/home/azureuser/.ssh/authorized_keys"
+            }
+          ]
+        }
+      },
+      "requireGuestProvisionSignal": true,
+      "secrets": [],
+      "windowsConfiguration": null
+    },
+    "priority": null,
+    "scheduledEventsProfile": null,
+    "securityProfile": null,
+    "storageProfile": {
+      "dataDisks": null,
+      "imageReference": {
+        "exactVersion": null,
+        "id": null,
+        "offer": "UbuntuServer",
+        "publisher": "Canonical",
+        "sku": "18.04-LTS",
+        "version": "latest"
+      },
+      "osDisk": {
+        "caching": "ReadWrite",
+        "createOption": "FromImage",
+        "diffDiskSettings": null,
+        "diskSizeGb": 30,
+        "image": null,
+        "managedDisk": {
+          "diskEncryptionSet": null,
+          "storageAccountType": "Premium_LRS"
+        },
+        "name": null,
+        "osType": null,
+        "vhdContainers": null,
+        "writeAcceleratorEnabled": null
+      }
+    }
+  },
+  "zoneBalance": null,
+  "zones": null
+}
+roy@Azure:~$ az network public-ip show \
+>     --name webServerScaleSetLBPublicIP \
+>     --resource-group scalesetrg \
+>     --output tsv \
+>     --query ipAddress
+138.91.79.54
+roy@Azure:~$    az group delete \
+>       --name scalesetrg \
+>       --yes
+ - Running ..

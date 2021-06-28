@@ -1,0 +1,247 @@
+Use data volumes
+
+https://docs.microsoft.com/en-us/learn/modules/run-docker-with-azure-container-instances/5-use-data-volumes
+
+roy@Azure:~$ STORAGE_ACCOUNT_NAME=mystorageaccount$RANDOM
+roy@Azure:~$ az storage account create \
+>   --resource-group learn-deploy-aci-rg \
+>   --name $STORAGE_ACCOUNT_NAME \
+>   --sku Standard_LRS \
+>   --location eastus
+{- Finished ..
+  "accessTier": "Hot",
+  "allowBlobPublicAccess": null,
+  "azureFilesIdentityBasedAuthentication": null,
+  "blobRestoreStatus": null,
+  "creationTime": "2020-11-09T02:31:06.482048+00:00",
+  "customDomain": null,
+  "enableHttpsTrafficOnly": true,
+  "encryption": {
+    "keySource": "Microsoft.Storage",
+    "keyVaultProperties": null,
+    "requireInfrastructureEncryption": null,
+    "services": {
+      "blob": {
+        "enabled": true,
+        "keyType": "Account",
+        "lastEnabledTime": "2020-11-09T02:31:06.575774+00:00"
+      },
+      "file": {
+        "enabled": true,
+        "keyType": "Account",
+        "lastEnabledTime": "2020-11-09T02:31:06.575774+00:00"
+      },
+      "queue": null,
+      "table": null
+    }
+  },
+  "failoverInProgress": null,
+  "geoReplicationStats": null,
+  "id": "/subscriptions/cadf6f2b-8537-4829-aede-75fc90459ce0/resourceGroups/learn-deploy-aci-rg/providers/Microsoft.Storage/storageAccounts/mystorageaccount7182",
+  "identity": null,
+  "isHnsEnabled": null,
+  "kind": "StorageV2",
+  "largeFileSharesState": null,
+  "lastGeoFailoverTime": null,
+  "location": "eastus",
+  "minimumTlsVersion": null,
+  "name": "mystorageaccount7182",
+  "networkRuleSet": {
+    "bypass": "AzureServices",
+    "defaultAction": "Allow",
+    "ipRules": [],
+    "virtualNetworkRules": []
+  },
+  "primaryEndpoints": {
+    "blob": "https://mystorageaccount7182.blob.core.windows.net/",
+    "dfs": "https://mystorageaccount7182.dfs.core.windows.net/",
+    "file": "https://mystorageaccount7182.file.core.windows.net/",
+    "internetEndpoints": null,
+    "microsoftEndpoints": null,
+    "queue": "https://mystorageaccount7182.queue.core.windows.net/",
+    "table": "https://mystorageaccount7182.table.core.windows.net/",
+    "web": "https://mystorageaccount7182.z13.web.core.windows.net/"
+  },
+  "primaryLocation": "eastus",
+  "privateEndpointConnections": [],
+  "provisioningState": "Succeeded",
+  "resourceGroup": "learn-deploy-aci-rg",
+  "routingPreference": null,
+  "secondaryEndpoints": null,
+  "secondaryLocation": null,
+  "sku": {
+    "name": "Standard_LRS",
+    "tier": "Standard"
+  },
+  "statusOfPrimary": "available",
+  "statusOfSecondary": null,
+  "tags": {},
+  "type": "Microsoft.Storage/storageAccounts"
+}
+roy@Azure:~$ export AZURE_STORAGE_CONNECTION_STRING=$(az storage account show-connection-string \
+>   --resource-group learn-deploy-aci-rg \
+>   --name $STORAGE_ACCOUNT_NAME \
+>   --output tsv)
+roy@Azure:~$ az storage share create --name aci-share-demo
+{
+  "created": true
+}
+roy@Azure:~$ STORAGE_KEY=$(az storage account keys list \
+>   --resource-group learn-deploy-aci-rg \
+>   --account-name $STORAGE_ACCOUNT_NAME \
+>   --query "[0].value" \
+>   --output tsv)
+roy@Azure:~$ echo $STORAGE_KEY
+jF9obf5W+9bB9E6mFo2zPTSd/km2qqa+dKUdcY6cQxfdHxV/Z51GwYw4S5hGbyyzILuqn16BMzIjkLILxjyhmA==
+roy@Azure:~$ az container create \
+>   --resource-group learn-deploy-aci-rg \
+>   --name aci-demo-files \
+>   --image microsoft/aci-hellofiles \
+>   --location eastus \
+>   --ports 80 \
+>   --ip-address Public \
+>   --azure-file-volume-account-name $STORAGE_ACCOUNT_NAME \
+>   --azure-file-volume-account-key $STORAGE_KEY \
+>   --azure-file-volume-share-name aci-share-demo \
+>   --azure-file-volume-mount-path /aci/logs/
+{- Finished ..
+  "containers": [
+    {
+      "command": null,
+      "environmentVariables": [],
+      "image": "microsoft/aci-hellofiles",
+      "instanceView": {
+        "currentState": {
+          "detailStatus": "",
+          "exitCode": null,
+          "finishTime": null,
+          "startTime": "2020-11-09T02:34:18.270000+00:00",
+          "state": "Running"
+        },
+        "events": [],
+        "previousState": null,
+        "restartCount": 0
+      },
+      "livenessProbe": null,
+      "name": "aci-demo-files",
+      "ports": [
+        {
+          "port": 80,
+          "protocol": "TCP"
+        }
+      ],
+      "readinessProbe": null,
+      "resources": {
+        "limits": null,
+        "requests": {
+          "cpu": 1.0,
+          "gpu": null,
+          "memoryInGb": 1.5
+        }
+      },
+      "volumeMounts": [
+        {
+          "mountPath": "/aci/logs/",
+          "name": "azurefile",
+          "readOnly": null
+        }
+      ]
+    }
+  ],
+  "diagnostics": null,
+  "dnsConfig": null,
+  "id": "/subscriptions/cadf6f2b-8537-4829-aede-75fc90459ce0/resourceGroups/learn-deploy-aci-rg/providers/Microsoft.ContainerInstance/containerGroups/aci-demo-files",
+  "identity": null,
+  "imageRegistryCredentials": null,
+  "instanceView": {
+    "events": [
+      {
+        "count": 1,
+        "firstTimestamp": "2020-11-09T02:34:16.938000+00:00",
+        "lastTimestamp": "2020-11-09T02:34:16.938000+00:00",
+        "message": "Successfully mounted Azure File Volume.",
+        "name": "SuccessfulMountAzureFileVolume",
+        "type": "Normal"
+      }
+    ],
+    "state": "Running"
+  },
+  "ipAddress": {
+    "dnsNameLabel": null,
+    "fqdn": null,
+    "ip": "52.188.35.228",
+    "ports": [
+      {
+        "port": 80,
+        "protocol": "TCP"
+      }
+    ],
+    "type": "Public"
+  },
+  "location": "eastus",
+  "name": "aci-demo-files",
+  "networkProfile": null,
+  "osType": "Linux",
+  "provisioningState": "Succeeded",
+  "resourceGroup": "learn-deploy-aci-rg",
+  "restartPolicy": "Always",
+  "tags": {},
+  "type": "Microsoft.ContainerInstance/containerGroups",
+  "volumes": [
+    {
+      "azureFile": {
+        "readOnly": null,
+        "shareName": "aci-share-demo",
+        "storageAccountKey": null,
+        "storageAccountName": "mystorageaccount7182"
+      },
+      "emptyDir": null,
+      "gitRepo": null,
+      "name": "azurefile",
+      "secret": null
+    }
+  ]
+}
+roy@Azure:~$ az container show \
+>   --resource-group learn-deploy-aci-rg \
+>   --name aci-demo-files \
+>   --query ipAddress.ip \
+>   --output tsv
+52.188.35.228
+roy@Azure:~$ az storage file list -s aci-share-demo -o table
+Name               Content Length    Type    Last Modified
+-----------------  ----------------  ------  ---------------
+1604889318251.txt  6                 file
+roy@Azure:~$ az storage file download -s aci-share-demo -p 1604889318251.txt
+Finished[#############################################################]  100.0000%
+{
+  "content": null,
+  "metadata": {},
+  "name": "1604889318251.txt",
+  "properties": {
+    "contentLength": 6,
+    "contentRange": "bytes 0-5/6",
+    "contentSettings": {
+      "cacheControl": null,
+      "contentDisposition": null,
+      "contentEncoding": null,
+      "contentLanguage": null,
+      "contentType": "application/octet-stream"
+    },
+    "copy": {
+      "completionTime": null,
+      "id": null,
+      "progress": null,
+      "source": null,
+      "status": null,
+      "statusDescription": null
+    },
+    "etag": "\"0x8D8845818F52ED9\"",
+    "lastModified": "2020-11-09T02:35:18+00:00",
+    "serverEncrypted": true
+  }
+}
+roy@Azure:~$ cat 1604889318251.txt
+HElloo
+
+roy@Azure:~$

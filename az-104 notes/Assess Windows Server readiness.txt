@@ -1,0 +1,92 @@
+1. Create a Windows file server
+
+Powershell
+
+Run the following command to create a resource group. Replace EastUS with the value of a location near you.
+$resourceGroup = 'learn-file-sync-rg'
+$location = 'EastUS'
+New-AzResourceGroup -Name $resourceGroup -Location $location
+
+
+create a subnet and virtual network in the same location as the resource group:
+
+$subnetConfig = New-AzVirtualNetworkSubnetConfig `
+-Name Syncpublicnet `
+-AddressPrefix 10.0.0.0/24
+
+$virtualNetwork = New-AzVirtualNetwork `
+-Name Syncvnet `
+-AddressPrefix 10.0.0.0/16 `
+-Location $location `
+-ResourceGroupName $resourceGroup `
+-Subnet $subnetConfig
+
+
+create admin account for the vm, rerun the command if you forget to save your password or inserted wrong thing
+$cred = Get-Credential
+
+example: 
+PS /home/yan> $cred = Get-Credential
+
+PowerShell credential request
+Enter your credentials.
+User: learnadmin
+Password for user learnadmin: ******************
+
+
+Create the Windows Server machine:
+ New-Azvm `
+ -Name FileServerLocal `
+ -Credential $cred `
+ -ResourceGroupName $resourceGroup `
+ -Size Standard_DS1_v2 `
+ -VirtualNetworkName Syncvnet `
+ -SubnetName Syncpublicnet `
+ -Image "MicrosoftWindowsServer:WindowsServer:2019-Datacenter-with-Containers:latest" 
+ 
+ 
+ Connect to VM from Azure portal
+ Sign in to the Azure portal .
+
+In the portal, in the left pane, select Virtual machines.
+
+Select the FileServerLocal VM.
+
+In the top menu, select Connect.
+
+Select Download RDP File.
+
+Open the RDP file from your browser and select Connect.
+
+In the Windows Security window, select More choices, and then select Use a different account.
+
+Enter the user name learnadmin and the password you used earlier, and then select OK.
+
+If you're asked to connect despite certificate errors, select Yes.
+
+After you've logged in, select Start, type cmd, and then select Command Prompt.
+
+At the command prompt, enter D: and then select Enter.
+
+Download this sample CAD file by using cURL:
+curl https://github.com/MicrosoftDocs/mslearn-extend-share-capacity-with-azure-file-sync/blob/master/resources/CADFolder.zip?raw=true -L -o CADFolder.zip
+
+Expand the zip file:
+CADFolder.zip
+
+select Compressed Folder Tools, and then select Extract all and Extract.
+
+Install the Azure PowerShell modules
+Right-click Start, and then select Windows PowerShell (Admin).
+
+In the console, download the latest Azure PowerShell modules:
+
+Install-Module -Name Az
+When prompted, enter Y to accept the untrusted repository. Do the same thing for any of the modules.
+
+The modules take a minute or two to install.
+
+how to check module in powershell
+ Get-Module -ListAvailable
+
+

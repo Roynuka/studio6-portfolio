@@ -1,0 +1,23 @@
+New-AzureADGroup -Description "Marketing" -DisplayName "Marketing" -MailEnabled $false -SecurityEnabled $true -MailNickName "Marketing"
+
+
+
+New-AzResourceGroup -Name production-learn-rg -Location EastUS #use this command when you need to create a new resource group for your deployment
+New-AzResourceGroupDeployment -ResourceGroupName production-learn-rg  -TemplateUri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-vm-simple-windows/azuredeploy.json
+
+az group deployment create --resource-group production-learn-rg --template-uri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-vm-simple-windows/azuredeploy.json
+
+
+productionadmin
+productionadminPa@ssw0rd
+
+
+az group create --name learn-storage-replication-rg --location westus2
+
+az storage account create \
+--name $AZURE_STORAGE_ACCOUNT \
+--resource-group learn-storage-replication-rg \
+--location $LOCATION \
+--sku Standard_GZRS \
+--encryption-services blob \
+--kind StorageV2

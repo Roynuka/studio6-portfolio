@@ -1,0 +1,119 @@
+Script:
+
+#Start by capturing the input parameter in a variable
+param([string]$resourceGroup)
+
+#Prompt for a username and password for the VM's admin account and capture the result in a variable
+$adminCredential = Get-Credential -Message "Enter a username and password for the VM administrator."
+
+#Create a loop that executes three times - which will create 3 VM
+For ($i = 1; $i -le 3; $i++) 
+{
+    #create a name for each VM and store it in a variable and output it to the console
+    $vmName = "ConferenceDemo" + $i
+    Write-Host "Creating VM: " $vmName
+
+    #create a VM using the $vmName variable
+    New-AzVm -ResourceGroupName $resourceGroup -Name $vmName -Credential $adminCredential -Image UbuntuLTS
+
+}
+
+
+PS /home/roy809> dir
+
+
+    Directory: /home/roy809
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+l----           11/1/2020  3:35 AM                clouddrive -> /usr/csuser/clouddrive
+
+PS /home/roy809> cd /home/roy809/clouddrive
+PS /home/roy809/clouddrive> dir
+PS /home/roy809/clouddrive> touch "./ConferenceDailyReset.ps1"
+PS /home/roy809/clouddrive> code "./ConferenceDailyReset.ps1"
+PS /home/roy809/clouddrive> .\ConferenceDailyReset.ps1 learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa
+
+PowerShell credential request
+Enter a username and password for the VM administrator.
+User: roy
+Password for user roy: *********
+
+Creating VM:  ConferenceDemo1
+
+
+ResourceGroupName        : learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa
+Id                       : /subscriptions/f27a2135-1ae7-44b2-b514-f0b7b1dcbfba/resourceGroups/learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa/providers/Microsoft.Compute/virtualMachines/ConferenceDemo1
+VmId                     : df953a58-6767-4ba6-9cda-0e0567c4cf11
+Name                     : ConferenceDemo1
+Type                     : Microsoft.Compute/virtualMachines
+Location                 : westus
+Tags                     : {}
+HardwareProfile          : {VmSize}
+NetworkProfile           : {NetworkInterfaces}
+OSProfile                : {ComputerName, AdminUsername, LinuxConfiguration, Secrets, AllowExtensionOperations, RequireGuestProvisionSignal}
+ProvisioningState        : Succeeded
+StorageProfile           : {ImageReference, OsDisk, DataDisks}
+FullyQualifiedDomainName : conferencedemo1-c93953.westus.cloudapp.azure.com
+
+Creating VM:  ConferenceDemo2
+
+ResourceGroupName        : learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa
+Id                       : /subscriptions/f27a2135-1ae7-44b2-b514-f0b7b1dcbfba/resourceGroups/learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa/providers/Microsoft.Compute/virtualMachines/ConferenceDemo2
+VmId                     : 3b07adc4-80c6-41fa-b35b-771f39315a22
+Name                     : ConferenceDemo2
+Type                     : Microsoft.Compute/virtualMachines
+Location                 : westus
+Tags                     : {}
+HardwareProfile          : {VmSize}
+NetworkProfile           : {NetworkInterfaces}
+OSProfile                : {ComputerName, AdminUsername, LinuxConfiguration, Secrets, AllowExtensionOperations, RequireGuestProvisionSignal}
+ProvisioningState        : Succeeded
+StorageProfile           : {ImageReference, OsDisk, DataDisks}
+FullyQualifiedDomainName : conferencedemo2-e9b089.westus.cloudapp.azure.com
+
+Creating VM:  ConferenceDemo3
+
+ResourceGroupName        : learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa
+Id                       : /subscriptions/f27a2135-1ae7-44b2-b514-f0b7b1dcbfba/resourceGroups/learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa/providers/Microsoft.Compute/virtualMachines/ConferenceDemo3
+VmId                     : 6459604f-7a84-4490-af51-e46d7f701486
+Name                     : ConferenceDemo3
+Type                     : Microsoft.Compute/virtualMachines
+Location                 : westus
+Tags                     : {}
+HardwareProfile          : {VmSize}
+NetworkProfile           : {NetworkInterfaces}
+OSProfile                : {ComputerName, AdminUsername, LinuxConfiguration, Secrets, AllowExtensionOperations, RequireGuestProvisionSignal}
+ProvisioningState        : Succeeded
+StorageProfile           : {ImageReference, OsDisk, DataDisks}
+FullyQualifiedDomainName : conferencedemo3-417e43.westus.cloudapp.azure.com
+
+
+PS /home/roy809/clouddrive> Get-AzResource -ResourceType Microsoft.Compute/virtualMachines
+
+Name              : ConferenceDemo1
+ResourceGroupName : learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa
+ResourceType      : Microsoft.Compute/virtualMachines
+Location          : westus
+ResourceId        : /subscriptions/f27a2135-1ae7-44b2-b514-f0b7b1dcbfba/resourceGroups/learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa/providers/Microsoft.Compute/virtualMachines/ConferenceDemo1
+Tags              :
+
+Name              : ConferenceDemo2
+ResourceGroupName : learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa
+ResourceType      : Microsoft.Compute/virtualMachines
+Location          : westus
+ResourceId        : /subscriptions/f27a2135-1ae7-44b2-b514-f0b7b1dcbfba/resourceGroups/learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa/providers/Microsoft.Compute/virtualMachines/ConferenceDemo2
+Tags              :
+
+Name              : ConferenceDemo3
+ResourceGroupName : learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa
+ResourceType      : Microsoft.Compute/virtualMachines
+Location          : westus
+ResourceId        : /subscriptions/f27a2135-1ae7-44b2-b514-f0b7b1dcbfba/resourceGroups/learn-6aff4bf4-0dac-41b3-9b4a-df8b4d94aeaa/providers/Microsoft.Compute/virtualMachines/ConferenceDemo3
+Tags              :
+
+
+PS /home/roy809/clouddrive>
+
+PowerShell cmdlet command to delete the resource group (and all related resources).
+Remove-AzResourceGroup -Name MyResourceGroupName
